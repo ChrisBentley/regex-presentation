@@ -24,8 +24,227 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h2 style="color: red;">Reading Regex:</h2>
+					<p>
+						Getting better with regular expressions!
+					</p>
+				</section>
+
+				<section>
+					<h2>Today's session:</h2>
+					<ul>
+						<li class="fragment">Step 1: Go through the basics</li>
+						<li class="fragment">Step 2: Practice some slightly harder examples</li>
+						<li class="fragment">Step 3: ???</li>
+						<li class="fragment">Step 4: Profit! (i.e. be more comfortable with regex!)</li>
+					</ul>
+				</section>
+
+				<section data-background="https://media.giphy.com/media/ZcAY3yKiwqKbK/giphy.gif" data-background-size="60%"><p style="color: red;">Get you from here...</p></section>
+
+				<section data-background="https://media.giphy.com/media/A9lgUYVqLeRb2/giphy.gif" data-background-size="90%"><p style="color: red;">to here!</p></section>
+
+				<section>
+					<h2>Getting started:</h2>
+					<p class="fragment">
+						<span style="color: orange;">'/'</span> denotes the start and end of a regex
+					</p>
+					<p class="fragment">
+						The following regex <span style="color: orange">/abc/</span> will match the string '<span style="color: yellow;">abcdef</span>' like so '<span style="color: green;">abc</span><span style="color: yellow;">def</span>'
+					</p>
+				</section>
+
+				<section>
+					<p class="fragment">Adding a <span style="color: orange;">g</span> after the end of the <span style="color: orange;">'/'</span> adds a global flag to the regex</p>
+					<p class="fragment">This means that it will continue to match after it's found the first iteration of a matching string.</p>
+					<p class="fragment">
+						e.g. <span style="color: orange">/abc/g</span> matches the string '<span style="color: yellow;">abcdef abcd</span>' like so: '<span style="color: green;">abc</span><span style="color: yellow;">def</span> <span style="color: green;">abc</span><span style="color: yellow;">d</span>'
+					</p>
+				</section>
+
+				<section>
+					<h2>
+						Matches for types:
+					</h2>
+				</section>
+
+				<section>
+					<p class="fragment">
+						<span style="color: orange">.</span> matches any character.
+					</p>
+					<p class="fragment">e.g. '<span style="color: orange">/./</span>' matches '<span style="color: yellow">abc</span>' and '<span style="color: yellow">%5£</span>' like so '<span style="color: green">a</span><span style="color: yellow">bc</span>' '<span style="color: green">%</span><span style="color: yellow">5£</span>'
+					</p>
+					<p class="fragment">
+						If you need to match a period you can escape the character in the regex using a blackslash i.e. <span style="color: orange">/\./</span> would match '<span style="color: green">.</span>'
+					</p>
+				</section>
+
+				<section>
+					<p class="fragment">
+						<span style="color: orange">\d</span> matches any digit.
+					</p>
+					<p class="fragment">e.g. '<span style="color: orange">/\d/</span>' matches '<span style="color: yellow">123</span>' like so '<span style="color: green">1</span><span style="color: yellow">23</span>'
+					</p>
+					<p class="fragment">
+					It will not match '<span style="color: yellow">a54</span>' -> '<span style="color: red">a</span><span style="color: yellow">54</span>'
+					</p>
+				</section>
+
+				<section>
+					<p class="fragment">
+						<span style="color: orange">\w</span> matches any alphanumerical character.
+					</p>
+					<p class="fragment">e.g. '<span style="color: orange">/\w/</span>' matches '<span style="color: yellow">123</span>' and '<span style="color: yellow">a54</span>' like so '<span style="color: green">1</span><span style="color: yellow">23</span>' '<span style="color: green">a</span><span style="color: yellow">54</span>'
+					</p>
+					<p class="fragment">
+					It will not match '<span style="color: yellow">%a5</span>' -> '<span style="color: red">%</span><span style="color: yellow">a5</span>'
+					</p>
+				</section>
+
+				<section>
+					<p class="fragment">
+						<span style="color: orange">\s</span> matches any whitespace character.
+					</p>
+					<p class="fragment">e.g. '<span style="color: orange">/\s/</span>' matches '<span style="color: yellow"> 23</span>' like so '<span style="color: green">_</span><span style="color: yellow">23</span>'
+					</p>
+				</section>
+
+				<section>
+					<p>
+					Capital letter version of these type matchers will do the opposite. i.e.
+					</p>
+					<p>
+						<span style="color: orange;">\W</span> matches any non-alphanumerical character.
+					</p>
+					<p>
+						<span style="color: orange;">\S</span> matches any non-whitespace character.
+					</p>
+				</section>
+
+				<section>
+					<p>
+						Match multiple letters in a certain position using <span style="color: orange">[ ]</span>
+					</p>
+					<p class="fragment">
+						If I have the strings '<span style="color: yellow">cat</span>', '<span style="color: yellow">mat</span>' and '<span style="color: yellow">bat</span>'
+					</p>
+					<p class="fragment">
+						But I only want to match '<span style="color: yellow">mat</span>' and '<span style="color: yellow">bat</span>'
+					</p>
+					<p class="fragment">
+						I would use the regex <span style="color: orange">/[mb]at/</span>
+					</p>
+					<p class="fragment">
+						Matches like so: '<span style="color: red">c</span><span style="color: green">at</span>' '<span style="color: green">mat</span>''<span style="color: green">bat</span>'
+					</p>
+					<p class="fragment">Because the first letter of cat does not match the regex, the string will not be matched.</p>
+				</section>
+
+				<section>
+					<p>
+						We can also match ranges of letters or numbers using a hyphen between them like so:
+					</p>
+					<ul>
+						<li class="fragment"><span style="color: orange">[A-Z]</span></li>
+						<li class="fragment"><span style="color: orange">[a-z]</span></li>
+						<li class="fragment"><span style="color: orange">[0-9]</span></li>
+					</ul>
+					<p class="fragment">
+						The NOT operator inside of these square brackets is the carot <span style="color: orange">^</span>
+						<ul>
+							<li class="fragment">e.g. <span style="color: orange">'[^a]'</span> means not an <span style="color: yellow">'a'</span> character</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<p>
+						If you want to match characters that are repeated multiple times you can use <span style="color: orange">{ }</span>
+					</p>
+
+					<p class="fragment">
+						e.g. <span style="color: orange">/WE{6}!/</span> matches <span style="color: yellow">'WEEEEEE!'</span>
+					</p>
+					<img class="fragment" src="https://render.bitstrips.com/v2/cpanel/10058730-296649771_2-s1-v1.png?transparent=1&palette=1" style="height: 300px; width: 300px; border: none;">
+				</section>
+
+				<section>
+					<p>We can also match a range of repeated characters using <span style="color: orange;">{m,n}</span></p>
+					<p class="fragment">e.g. <span style="color: orange;">hello{1,4}!</span> matches <span style="color: yellow;">'hello!'</span> and <span style="color: yellow;">'helloooo!'</span></p>
+					<img class="fragment" src="https://render.bitstrips.com/v2/cpanel/10211671-296649771_2-s1-v1.png?transparent=1&palette=1" style="height: 300px; width: 300px; border: none;">
+				</section>
+
+				<section>
+					<p>
+						If we want to keep matching any number of repeated characters we can use:
+					</p>
+					<p class="fragment"><span style="color: orange">*</span> for 0 or more repetitions</p>
+					<p class="fragment"><span style="color: orange">+</span> for 1 or more repetitions.</p>
+					<p class="fragment">e.g. <span style="color: orange;">yus+</span> or <span style="color: orange;">yus*</span> match <span style="color: yellow;">'yussssss...'</span></p>
+					<img class="fragment" src="https://render.bitstrips.com/v2/cpanel/10211507-296649771_2-s1-v1.png?transparent=1&palette=1" style="height: 250px; width: 250px; border: none;">
+				</section>
+
+				<section>
+					<p>
+						<span style="color: orange;">?</span> follows an optional character
+					</p>
+					<p class="fragment">
+						e.g. <span style="color: orange;">/woot?/</span> would match <span style="color: yellow;">'woo'</span> and <span style="color: yellow;">'woot'</span>
+					</p>
+					<img class="fragment" src="https://render.bitstrips.com/v2/cpanel/10221939-296649771_2-s1-v1.png?transparent=1&palette=1" style="height: 300px; width: 300px; border: none;">
+				</section>
+
+				<section>
+					<p>
+						<span style="color: orange;">^</span> and <span style="color: orange;">$</span> denote the start and end of the thing to match.
+					</p>
+					<p class="fragment">
+						This is especially useful is you need to match exact things.
+					</p>
+					<p class="fragment">
+						e.g. If you have the string <span style="color: yellow;">'API Call: successful'</span> you might be tempted to use the regex <span style="color: orange;">/successful/</span>
+					</p>
+					<p class="fragment">
+						But what if your logs also contain <span style="color: yellow;">'Error: Expected "API Call: successful"'</span>?!
+					</p>
+					<p class="fragment">
+						Anchors to the rescue! We would use: <span style="color: orange">/^API Call: successful$/</span>
+					</p>
+				</section>
+
+				<section>
+					<p>
+						<span style="color: orange;">( )</span> are used to capture parts of a message
+					</p>
+					<p class="fragment">
+						e.g. If we have the strings of the format <span style="color: yellow;">'5 Jan 1985'</span> you could capture the year using:
+					</p>
+					<p class="fragment">
+						<span class="fragment" style="color: orange;">/\d+</span>
+						<span class="fragment" style="color: orange;">\s</span>
+						<span class="fragment" style="color: orange;">[A-z]+</span>
+						<span class="fragment" style="color: orange;">\s</span>
+						<span class="fragment" style="color: green;">([0-9]+)</span><span class="fragment" style="color: orange;">/</span>
+					</p>
+				</section>
+
+				<section>
+					<p>
+						Practice yourself!
+					</p>
+					<p>
+						<a href="https://regexone.com/">https://regexone.com/</a>
+					</p>
+					<p>
+						Test your own strings: <a href="http://regexr.com/">http://regexr.com/</a>
+					</p>
+				</section>
+
+				<section>
+					<h2>The END!</h2>
+					<img src="https://render.bitstrips.com/v2/cpanel/10149736-296649771_2-s1-v1.png?transparent=1&palette=1" style="height: 400px; width: 400px; border: none;">
+				</section>
 			</div>
 		</div>
 
